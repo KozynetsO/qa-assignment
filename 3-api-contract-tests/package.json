@@ -1,0 +1,15 @@
+{
+  "name": "3-api-contract-tests",
+  "version": "1.0.0",
+  "description": "Create a test suite that showcases contract testing using the swagger petstore openAPI spec (https://petstore3.swagger.io/).",
+  "main": "index.js",
+  "scripts": {
+    "test": "newman run collection.json -e environment.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "newman": "^6.2.1"
+  }
+}

@@ -1,0 +1,727 @@
+{
+	"info": {
+		"_postman_id": "8d7fd864-b3fd-47e1-8d16-8f8aa6b2e480",
+		"name": "Swagger Petstore - OpenAPI 3.0",
+		"description": "This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about\nSwagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!\nYou can now help us improve the API whether it's by making changes to the definition itself or to the code.\nThat way, with time, we can improve the API in general, and expose some of the new features in OAS3.\n\nSome useful links:\n- [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)\n- [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)\n\nContact Support:\n Email: apiteam@swagger.io",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44251972",
+		"_collection_link": "https://alexk-1148895.postman.co/workspace/Alex-K's-Workspace~b628ef5a-8c00-4748-8092-b8e43d79ab10/collection/44251972-8d7fd864-b3fd-47e1-8d16-8f8aa6b2e480?action=share&source=collection_link&creator=44251972"
+	},
+	"item": [
+		{
+			"name": "pet",
+			"item": [
+				{
+					"name": "findByStatus",
+					"item": [
+						{
+							"name": "Finds Pets by status.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response contains valid pets array\", function() {\r",
+											"    eval(pm.collectionVariables.get(\"validatePet\"));\r",
+											"    eval(pm.collectionVariables.get(\"validatePetsArray\"));\r",
+											"    const pets = pm.response.json();\r",
+											"    validatePetsArray(pets);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "scope",
+											"value": "write:pets read:pets",
+											"type": "string"
+										},
+										{
+											"key": "authUrl",
+											"value": "https://petstore3.swagger.io/oauth/authorize",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "implicit",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/pet/findByStatus?status=available",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pet",
+										"findByStatus"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "available",
+											"description": "Status values that need to be considered for filter"
+										}
+									]
+								},
+								"description": "Multiple status values can be provided with comma separated strings."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "findByTags",
+					"item": [
+						{
+							"name": "Finds Pets by tags.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response contains valid pets array\", function() {\r",
+											"    eval(pm.collectionVariables.get(\"validatePet\"));\r",
+											"    eval(pm.collectionVariables.get(\"validatePetsArray\"));\r",
+											"    const pets = pm.response.json();\r",
+											"    validatePetsArray(pets);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "scope",
+											"value": "write:pets read:pets",
+											"type": "string"
+										},
+										{
+											"key": "authUrl",
+											"value": "https://petstore3.swagger.io/oauth/authorize",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "implicit",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/pet/findByTags?tags=tag2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pet",
+										"findByTags"
+									],
+									"query": [
+										{
+											"key": "tags",
+											"value": "tag2"
+										}
+									]
+								},
+								"description": "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "{petId}",
+					"item": [
+						{
+							"name": "uploadImage",
+							"item": [
+								{
+									"name": "Uploads an image.",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response contains valid pet\", function() {\r",
+													"    eval(pm.collectionVariables.get(\"validatePet\"));\r",
+													"    const pets = pm.response.json();\r",
+													"    validatePet(pets);\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "oauth2",
+											"oauth2": [
+												{
+													"key": "scope",
+													"value": "write:pets read:pets",
+													"type": "string"
+												},
+												{
+													"key": "authUrl",
+													"value": "https://petstore3.swagger.io/oauth/authorize",
+													"type": "string"
+												},
+												{
+													"key": "grant_type",
+													"value": "implicit",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/octet-stream"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "file",
+											"file": {
+												"src": "{{imagePath}}"
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/pet/{{petId}}/uploadImage?additionalMetadata=1",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"pet",
+												"{{petId}}",
+												"uploadImage"
+											],
+											"query": [
+												{
+													"key": "additionalMetadata",
+													"value": "1",
+													"description": "Additional Metadata"
+												}
+											]
+										},
+										"description": "Upload image of the pet."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Find pet by ID.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response contains valid pet\", function() {\r",
+											"    eval(pm.collectionVariables.get(\"validatePet\"));\r",
+											"    const pets = pm.response.json();\r",
+											"    validatePet(pets);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "key",
+											"value": "api_key",
+											"type": "string"
+										},
+										{
+											"key": "value",
+											"value": "{{apiKey}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/pet/{{petId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pet",
+										"{{petId}}"
+									]
+								},
+								"description": "Returns a single pet."
+							},
+							"response": []
+						},
+						{
+							"name": "Updates a pet in the store with form data.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response contains valid pet\", function() {\r",
+											"    eval(pm.collectionVariables.get(\"validatePet\"));\r",
+											"    const pets = pm.response.json();\r",
+											"    validatePet(pets);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "scope",
+											"value": "write:pets read:pets",
+											"type": "string"
+										},
+										{
+											"key": "authUrl",
+											"value": "https://petstore3.swagger.io/oauth/authorize",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "implicit",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "file",
+									"file": {}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pet/{{petId}}?name=test&status=pending",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pet",
+										"{{petId}}"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "test"
+										},
+										{
+											"key": "status",
+											"value": "pending"
+										}
+									]
+								},
+								"description": "Updates a pet resource based on the form data."
+							},
+							"response": []
+						},
+						{
+							"name": "Deletes a pet.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "scope",
+											"value": "write:pets read:pets",
+											"type": "string"
+										},
+										{
+											"key": "authUrl",
+											"value": "https://petstore3.swagger.io/oauth/authorize",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "implicit",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "api_key",
+										"value": "<string>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/pet/{{petId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pet",
+										"{{petId}}"
+									]
+								},
+								"description": "Delete a pet."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update an existing pet.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains valid pet\", function() {\r",
+									"    eval(pm.collectionVariables.get(\"validatePet\"));\r",
+									"    const pets = pm.response.json();\r",
+									"    validatePet(pets);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "scope",
+									"value": "write:pets read:pets",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "https://petstore3.swagger.io/oauth/authorize",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "implicit",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 10,\n  \"name\": \"doggie\",\n  \"category\": {\n    \"id\": 1,\n    \"name\": \"Dogs\"\n  },\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 0,\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						},
+						"description": "Update an existing pet by Id."
+					},
+					"response": []
+				},
+				{
+					"name": "Add a new pet to the store.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains valid pet\", function() {\r",
+									"    eval(pm.collectionVariables.get(\"validatePet\"));\r",
+									"    const pets = pm.response.json();\r",
+									"    validatePet(pets);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "scope",
+									"value": "write:pets read:pets",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "https://petstore3.swagger.io/oauth/authorize",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "implicit",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 10,\n  \"name\": \"doggie\",\n  \"category\": {\n    \"id\": 1,\n    \"name\": \"Dogs\"\n  },\n  \"photoUrls\": [\n    \"string\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 0,\n      \"name\": \"string\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						},
+						"description": "Add a new pet to the store."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"function validatePet(pet) {\r",
+					"    const requiredKeys = [\"name\", \"photoUrls\"];\r",
+					"    const optionalKeys = [\"id\", \"category\", \"tags\", \"status\"];\r",
+					"    const allKnownKeys = requiredKeys.concat(optionalKeys);\r",
+					"\r",
+					"    Object.keys(pet).forEach(key => {\r",
+					"        pm.expect(allKnownKeys).to.include(key);\r",
+					"    });\r",
+					"\r",
+					"    requiredKeys.forEach(key => {\r",
+					"        pm.expect(pet).to.have.property(key);\r",
+					"    });\r",
+					"\r",
+					"    pm.expect(pet.name).to.be.a(\"string\");\r",
+					"\r",
+					"    pm.expect(pet.photoUrls).to.be.an(\"array\");\r",
+					"    pet.photoUrls.forEach(url => {\r",
+					"        pm.expect(url).to.be.a(\"string\");\r",
+					"    });\r",
+					"\r",
+					"    if (pet.hasOwnProperty(\"id\")) {\r",
+					"        pm.expect(pet.id).to.be.a(\"number\");\r",
+					"    }\r",
+					"\r",
+					"    if (pet.hasOwnProperty(\"tags\")) {\r",
+					"        pm.expect(pet.tags).to.be.an(\"array\");\r",
+					"        pet.tags.forEach(tag => {\r",
+					"            pm.expect(tag).to.be.an(\"object\");\r",
+					"            if (tag.hasOwnProperty(\"id\")) {\r",
+					"                pm.expect(tag.id).to.be.a(\"number\");\r",
+					"            }\r",
+					"            if (tag.hasOwnProperty(\"name\")) {\r",
+					"                pm.expect(tag.name).to.be.a(\"string\");\r",
+					"            }\r",
+					"        });\r",
+					"    }\r",
+					"\r",
+					"    if (pet.hasOwnProperty(\"category\")) {\r",
+					"        pm.expect(pet.category).to.be.an(\"object\");\r",
+					"        if (pet.category.hasOwnProperty(\"id\")) {\r",
+					"            pm.expect(pet.category.id).to.be.a(\"number\");\r",
+					"        }\r",
+					"        if (pet.category.hasOwnProperty(\"name\")) {\r",
+					"            pm.expect(pet.category.name).to.be.a(\"string\");\r",
+					"        }\r",
+					"    }\r",
+					"\r",
+					"    if (pet.hasOwnProperty(\"status\")) {\r",
+					"        const validStatuses = [\"available\", \"pending\", \"sold\"];\r",
+					"        pm.expect(validStatuses).to.include(pet.status);\r",
+					"    }\r",
+					"}\r",
+					"\r",
+					"function validatePetsArray(pets) {\r",
+					"    pm.expect(pets).to.be.an(\"array\");\r",
+					"    pets.forEach(validatePet);\r",
+					"}\r",
+					"\r",
+					"pm.collectionVariables.set(\"validatePet\", validatePet.toString());\r",
+					"pm.collectionVariables.set(\"validatePetsArray\", validatePetsArray.toString());"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://petstore3.swagger.io/api/v3"
+		},
+		{
+			"key": "petId",
+			"value": "2",
+			"type": "string"
+		},
+		{
+			"key": "validatePet",
+			"value": ""
+		},
+		{
+			"key": "validatePetsArray",
+			"value": ""
+		}
+	]
+}

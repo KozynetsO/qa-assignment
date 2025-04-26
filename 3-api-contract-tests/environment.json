@@ -1,0 +1,22 @@
+{
+  "id": "1",
+  "name": "Petstore env",
+  "values": [
+    {
+      "key": "baseUrl",
+      "value": "https://petstore3.swagger.io/api/v3",
+      "enabled": true
+    },
+    {
+      "key": "petId",
+      "value": "1",
+      "enabled": true
+    },
+    {
+      "key": "imagePath",
+      "value": "./images/test.jpg",
+      "enabled": true
+    }
+  ],
+  "type": "environment"
+}
